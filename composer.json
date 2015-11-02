@@ -1,0 +1,17 @@
+{
+    "name": "emirazaiez/paypal",
+    "description": "Simple script which use paypal api svn on php",
+    "authors": [
+        {
+            "name": "EmirAzaiez",
+            "email": "contact@azaiez-emir.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "Paypal": "src/"
+        }
+    }
+}
