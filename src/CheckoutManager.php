@@ -29,7 +29,7 @@ class CheckoutManager
         $this->paypalParams['PWD'] = $password;
         $this->paypalParams['SIGNATURE'] = $signature;
 
-        $this->paypalParams["LOCALECODE"] = $LOCALECODE;
+        $this->paypalParams["LOCALECODE"] = $localcode;
     }
 
     public function requestExpressCheckout($price, $currency, $desc, $image, $cancelURL, $returnURL)
@@ -57,7 +57,7 @@ class CheckoutManager
 
         $this->requestExpressCheckoutDetails($token)->execute(function($result) use ($token) {
             $this->paypalParams['AMT'] = $result['AMT'];
-            $_SESSION['paypal_' . $result['TOKEN']]['paypal_user'] = $result;
+            $this->paypalUser = $result;
         });
 
         $this->paypalParams['METHOD'] = 'DoExpressCheckoutPayment';
@@ -102,13 +102,25 @@ class CheckoutManager
         {
             if ($this->paypalParams['METHOD'] == 'SetExpressCheckout')
             {
-                $_SESSION['paypal_' . $paypalResult['TOKEN']] = $this->transferData;
+                if (session_status() != PHP_SESSION_NONE) 
+                {
+                    $_SESSION['paypal_' . $paypalResult['TOKEN']] = $this->transferData;
+                }
 
                 $successCallback($this->paypalUrl . $paypalResult['TOKEN'], $paypalResult);
             }
             else if ($this->paypalParams['METHOD'] == 'DoExpressCheckoutPayment')
             {
-                $successCallback($_SESSION['paypal_' . $token], $paypalResult);
+                if (session_status() == PHP_SESSION_NONE) 
+                {
+                    $transferData = array();
+                }
+                else
+                {
+                    $transferData = $_SESSION['paypal_' . $paypalResult['TOKEN']];
+                }
+
+                $successCallback($transferData, $this->paypalUser, $paypalResult);
             }
             else
             {
