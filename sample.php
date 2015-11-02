@@ -21,9 +21,9 @@ $productConfig = array(
     'currency' => 'USD',
     'description' => 'My app subscription for 1 month', //Which will be show on the paypal payment page
     'logo' => 'http://creativebits.org/files/500px-Apple_Computer_Logo.svg_.png', //Logo of your company
-    'returnURL' => 'http://localhost/test/test.php', //The return url will be passed to paypal, this url will be call by paypal when the transfere will be done
-    'cancelURL' => 'http://localhost/test/test.php', //The return url will be passed to paypal, this url will be call when the user cancel the payment
-    'transferData' => array('productID' => '1', 'quantity' => '1month') //Those data arn't used by paypal, you can put whatever you want. Those data will be avaible on success of the "return url" called by paypal
+    'returnURL' => 'http://myweb.com/paypal/return', //The return url will be passed to paypal, this url will be call by paypal when the transfere will be done
+    'cancelURL' => 'http://myweb.com/paypal/cancel', //The return url will be passed to paypal, this url will be call when the user cancel the payment
+    'transferData' => array('productID' => '1', 'quantity' => '1month') //Those data arn't used by paypal, you can put whatever you want. Those data will be avaible on success of the "return url" called by paypal (You can only use this if you start the session)
 );
 
 if (isset($_GET['token']) && isset($_GET['PayerID']))
