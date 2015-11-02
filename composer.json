@@ -7,7 +7,6 @@
             "email": "contact@azaiez-emir.fr"
         }
     ],
-    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-0": {
