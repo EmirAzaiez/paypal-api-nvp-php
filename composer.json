@@ -10,6 +10,6 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload": {
-        "psr-0": { "": "src/" }
+        "files": ["src/CheckoutManager.php"]
     }
 }
