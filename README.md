@@ -72,7 +72,7 @@ $paypal = new CheckoutManager($paypalConfig['mode'], $paypalConfig['user'], $pay
 
 $paypal->requestExpressCheckoutPayment($_GET['token'], $_GET['PayerID'])
        ->execute(
-        function($transferedData, $success) {
+        function($transferedData, $paypalUser, $success) {
             //Put your own logic here (Will be some db call for save everything)
         }, 
         function($errors) {
@@ -87,9 +87,9 @@ Cancel payment : (route can be something like : /paypal/cancel)
 
 $paypal = new CheckoutManager($paypalConfig['mode'], $paypalConfig['user'], $paypalConfig['password'], $paypalConfig['signature'], $paypalConfig['lang']);
 
-$paypal->requestExpressCheckoutPayment($_GET['token'])
+$paypal->requestExpressCheckoutDetails($_GET['token'])
        ->execute(
-        function($transferedData, $paypalUserInformation) {
+        function($transferedData, $paypalUser) {
             //Put your own logic here
         }, 
         function($errors) {

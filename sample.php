@@ -45,7 +45,7 @@ else if (isset($_GET['token']))
 {
     $paypal = new CheckoutManager($paypalConfig['mode'], $paypalConfig['user'], $paypalConfig['password'], $paypalConfig['signature'], $paypalConfig['lang']);
 
-    $paypal->requestExpressCheckoutPayment($_GET['token'])
+    $paypal->requestExpressCheckoutDetails($_GET['token'])
            ->execute(
             function($transferedData, $paypalUser) {
                 var_dump($transferedData);
